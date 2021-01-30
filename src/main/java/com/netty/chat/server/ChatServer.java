@@ -30,6 +30,7 @@ public class ChatServer {
                     .option(ChannelOption.SO_BACKLOG, 1024)
                     .childHandler(new ChannelInitializer<SocketChannel>() {   //创建通道初始化对象,设置初始化参数
 
+                        @Override
                         protected void initChannel(SocketChannel sc) throws Exception {
                             //对workerGroup的SocketChannel设置处理器
                             ChannelPipeline pipeline = sc.pipeline();

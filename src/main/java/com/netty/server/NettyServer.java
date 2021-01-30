@@ -31,6 +31,7 @@ public class NettyServer {
                     .option(ChannelOption.SO_BACKLOG, 1024)
                     .childHandler(new ChannelInitializer<SocketChannel>() {   //创建通道初始化对象,设置初始化参数
 
+                        @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             //对workerGroup的SocketChannel设置处理器
                             socketChannel.pipeline().addLast(new NettyServerHandler());
@@ -57,7 +58,6 @@ public class NettyServer {
            //等待服务端监听端口关闭, closeFuture是异步操作
            //通过sync方法同步等待通道关闭,这里内部调用的是object.wait() 方法
             cf.channel().closeFuture().sync();
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
